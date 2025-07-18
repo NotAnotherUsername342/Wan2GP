@@ -1,15 +1,10 @@
 name: wan2gp-serverless
-image: python:3.10
 gpu: A5000
-accelerator: CUDA
 memory: 16Gi
-volume:
-  - name: model-cache
-    mountPath: /app/models
-    size: 50Gi
+storage: 50Gi
 python_version: 3.10
 handler: handler.py
 entrypoint: |
-  pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+  pip install torch==2.7.0 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
   pip install -r requirements.txt
   python handler.py
